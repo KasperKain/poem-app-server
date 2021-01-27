@@ -7,6 +7,7 @@ const serialize = (poem) => {
     id: poem.id,
     title: xss(poem.title),
     body: xss(poem.body),
+    style: poem.style,
   };
 };
 
@@ -14,8 +15,8 @@ const serialize = (poem) => {
 const queries = {
   create(db, poem) {
     return db.query(
-      'INSERT INTO poems (title, body) VALUES ($1, $2) returning *',
-      [poem.title, poem.body]
+      'INSERT INTO poems (title, body, style) VALUES ($1, $2, $3) returning *',
+      [poem.title, poem.body, poem.style]
     );
   },
   get(db, id) {
@@ -49,7 +50,7 @@ router
   // CREATE A POEM
   .post(async (req, res, next) => {
     try {
-      const poem = serialize(({ title, body } = req.body));
+      const poem = serialize(({ title, body, style } = req.body));
       const results = await queries.create(req.app.get('db'), poem);
       res.status(201).json(results.rows[0]);
     } catch (err) {
@@ -84,7 +85,6 @@ router
   .delete(async (req, res, next) => {
     try {
       const { id } = req.params;
-      console.log(id);
       const results = queries.delete(req.app.get('db'), id);
       res.status(204).json(results);
     } catch (err) {

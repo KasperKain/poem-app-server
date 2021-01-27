@@ -1,0 +1,4 @@
+ALTER TABLE poems
+    DROP COLUMN IF EXISTS style;
+
+    DROP TABLE IF EXISTS styles;
