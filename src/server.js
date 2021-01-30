@@ -1,18 +1,16 @@
-const db = require('./db');
+const pg = require('pg');
+const knex = require('knex');
 const app = require('./app');
-const { PORT } = require('./config');
+const { PORT, DATABASE_URL } = require('./config');
+
+pg.defaults.ssl = true;
+
+const db = knex({
+  client: 'pg',
+  connection: DATABASE_URL,
+});
 
 app.set('db', db);
-
-app.use((error, req, res, next) => {
-  let response;
-  if (process.env.NODE === 'production') {
-    response = { error: { message: 'server error' } };
-  } else {
-    response = { error };
-    res.status(500).json(response);
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
