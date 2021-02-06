@@ -23,7 +23,11 @@ const queries = {
   get(db, id) {
     return !id
       ? db.select('*').from('poems')
-      : db.select('*').from('poems').where('id', id);
+      : db
+          .select('*')
+          .from('poems')
+          .where('id', id)
+          .then(([poem]) => poem);
   },
 
   update(db, poem) {
