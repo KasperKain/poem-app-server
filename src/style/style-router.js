@@ -4,7 +4,7 @@ const { queries, serialize } = require('./style-service');
 // STYLE ROUTES
 router
   .route('/')
-  // GET ALL styles
+  // GET ALL STYLES
   .get(async (req, res, next) => {
     try {
       const results = await queries.get(req.app.get('db'));
@@ -13,7 +13,7 @@ router
       res.status(400).json(err);
     }
   })
-  // CREATE A style
+  // CREATE A STYLE
   .post(async (req, res, next) => {
     try {
       const style = serialize(({ head_style, body_style } = req.body));
@@ -26,7 +26,7 @@ router
 
 router
   .route('/:id')
-  // GET A style
+  // GET A STYLE
   .get(async (req, res, next) => {
     try {
       const results = await queries.get(req.app.get('db'), req.params.id);
@@ -35,7 +35,7 @@ router
       res.status(400).json(err);
     }
   })
-  // UPDATE A style
+  // UPDATE A STYLE
   .put(async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -47,7 +47,7 @@ router
       res.status(400).json(err);
     }
   })
-  // DELETE A style
+  // DELETE A STYLE
   .delete(async (req, res, next) => {
     try {
       const { id } = req.params;
