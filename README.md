@@ -1,7 +1,7 @@
 # POEM KEEPER
 
-[Imgur](https://imgur.com/dDMoAbX.png)
-[Imgur](https://imgur.com/75p6fif.png)
+![Imgur Image](https://imgur.com/dDMoAbX.png)
+![Imgur Image](https://imgur.com/75p6fif.png)
 
 ## SUMMARY
 
